@@ -62,8 +62,8 @@ const appStore = useAppStore()
         </div>
         <TabBar v-if="appStore.showTabs" class="h-45px" />
       </n-layout-header>
-      <!-- 121 = 16 + 45 + 60 45是面包屑高度 60是标签栏高度 -->
-      <!-- 56 = 16 + 40 40是页脚高度 -->
+      <!-- 121 = 16 + 45 + 60 45 is the height of bread crumbs 60 is the height of the label bar -->
+      <!-- 56 = 16 + 40 40 is the height of the footer -->
       <div
         class="flex-1 p-16px flex flex-col"
         :class="{

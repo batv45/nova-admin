@@ -128,6 +128,7 @@ function onClickoutside() {
         closable
         :name="item.path"
         @click="handleTab(item)"
+        @mousedown.middle.prevent="handleClose(item.path)"
         @contextmenu="handleContextMenu($event, item)"
       >
         <div class="flex-x-center gap-2">

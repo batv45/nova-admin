@@ -5,30 +5,30 @@ import AppVue from './App.vue'
 import AppLoading from './components/common/AppLoading.vue'
 
 async function setupApp() {
-  // 载入全局loading加载状态
+  // Load the global loading loading status
   const appLoading = createApp(AppLoading)
   appLoading.mount('#appLoading')
 
-  // 创建vue实例
+  // Create a Vue instance
   const app = createApp(AppVue)
 
-  // 注册模块Pinia
+  // Register module Pinia
   await installPinia(app)
 
-  // 注册模块 Vue-router
+  // Registered module Vue-router
   await installRouter(app)
 
-  /* 注册模块 指令/静态资源 */
+  /* Registration module instruction/static resource */
   Object.values(
     import.meta.glob<{ install: (app: App) => void }>('./modules/*.ts', {
       eager: true,
     }),
   ).map(i => app.use(i))
 
-  // 卸载载入动画
+  // Uninstalled animation
   appLoading.unmount()
 
-  // 挂载
+  // Mount
   app.mount('#app')
 }
 

@@ -44,7 +44,7 @@ function handleTopMenu(rowMenu: MenuOption[]) {
 onMounted(() => {
   handleTopMenu(routeStore.menus)
 
-  // 根据当前页面获取选中菜单和对应侧边菜单
+  // Select the selected menu and the corresponding side menu according to the current page
   const currentMenuKey = pageRoute.matched[1].path
   handleSideMenu(currentMenuKey)
   activeTopMenu.value = currentMenuKey
