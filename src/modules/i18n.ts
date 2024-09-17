@@ -1,8 +1,8 @@
 import type { App } from 'vue'
 import { local } from '@/utils/storage'
 import { createI18n } from 'vue-i18n'
-import enUS from '../../locales/en_US.json'
-import trTR from '../../locales/tr_TR.json'
+import enUS from '../../locales/en.json'
+import trTR from '../../locales/tr.json'
 
 const { VITE_DEFAULT_LANG } = import.meta.env
 

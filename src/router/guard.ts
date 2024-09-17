@@ -58,8 +58,10 @@ export function setupRouterGuard(router: Router) {
   router.beforeResolve((to) => {
     // Set the menu highlight
     routeStore.setActiveMenu(to.meta.activeMenu ?? to.fullPath)
-    // 添加tabs
-    tabStore.addTab(to)
+    if (appStore.showTabs) {
+      // Add tabs
+      tabStore.addTab(to)
+    }
     // Set the highlight label;
     tabStore.setCurrentTab(to.path as string)
   })

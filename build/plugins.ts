@@ -22,7 +22,9 @@ export function createVitePlugins(env: ImportMetaEnv) {
     // support vue
     vue(),
     vueJsx(),
-    VueDevTools(),
+    VueDevTools({
+      launchEditor: 'webstorm',
+    }),
 
     // support unocss
     UnoCSS(),

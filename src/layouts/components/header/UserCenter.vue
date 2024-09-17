@@ -80,17 +80,20 @@ function handleSelect(key: string | number) {
     :options="options"
     @select="handleSelect"
   >
-    <n-avatar
-      round
-
-      :src="userInfo?.avatar"
+    <n-flex
+      class="cursor-pointer"
     >
-      <template #fallback>
-        <div class="wh-full flex-center">
-          <icon-park-outline-user />
-        </div>
-      </template>
-    </n-avatar>
+      <n-avatar
+        round
+        :src="userInfo?.avatar"
+      >
+        <template #fallback>
+          <div class="wh-full flex-center">
+            <icon-park-outline-user />
+          </div>
+        </template>
+      </n-avatar>
+    </n-flex>
   </n-dropdown>
 </template>
 
