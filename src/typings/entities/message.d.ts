@@ -1,6 +1,6 @@
 /// <reference path="../global.d.ts"/>
 
-/* 角色数据库表字段 */
+/* Character database table field */
 namespace Entity {
   interface Message {
     id: number

@@ -1,11 +1,11 @@
 import { $t } from '@/utils'
-/** 默认实例的Aixos配置 */
+/** AIXOS configuration of the default instance */
 export const DEFAULT_ALOVA_OPTIONS = {
-  // 请求超时时间,默认15秒
+  // Request timeout time,默认15秒
   timeout: 15 * 1000,
 }
 
-/** 默认实例的后端字段配置 */
+/** The back -end field configuration of the default instance */
 export const DEFAULT_BACKEND_OPTIONS = {
   codeKey: 'code',
   dataKey: 'data',
@@ -13,7 +13,7 @@ export const DEFAULT_BACKEND_OPTIONS = {
   successCode: 200,
 }
 
-/** 请求不成功各种状态的错误 */
+/** Request errors in various states of various states */
 export const ERROR_STATUS = {
   default: $t('http.defaultTip'),
   400: $t('http.400'),
@@ -30,5 +30,5 @@ export const ERROR_STATUS = {
   505: $t('http.505'),
 }
 
-/** 没有错误提示的code */
+/** Code without error prompts */
 export const ERROR_NO_TIP_STATUS = [10000]

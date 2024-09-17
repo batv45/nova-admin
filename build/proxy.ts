@@ -14,8 +14,8 @@ export function generateProxyPattern(envConfig: Record<string, string>) {
 }
 
 /**
- * @description: 生成vite代理字段
- * @param {*} envConfig - 环境变量配置
+ * @description: Generate VITE proxy field
+ * @param {*} envConfig - Environment variable configuration
  */
 export function createViteProxy(envConfig: Record<string, string>) {
   const proxyMap = generateProxyPattern(envConfig)

@@ -9,7 +9,7 @@ import {
 type ErrorStatus = keyof typeof ERROR_STATUS
 
 /**
- * @description: 处理请求成功，但返回后端服务器报错
+ * @description: The processing request is successful, but the back -end server is returned to report an error
  * @param {Response} response
  * @return {*}
  */
@@ -31,8 +31,8 @@ export function handleResponseError(response: Response) {
 
 /**
  * @description:
- * @param {Record} data 接口返回的后台数据
- * @param {Service} config 后台字段配置
+ * @param {Record} data Background data returned by the interface
+ * @param {Service} config Background field configuration
  * @return {*}
  */
 export function handleBusinessError(data: Record<string, any>, config: Required<Service.BackendConfig>) {
@@ -50,7 +50,7 @@ export function handleBusinessError(data: Record<string, any>, config: Required<
 }
 
 /**
- * @description: 统一成功和失败返回类型
+ * @description: Unified success and failure return type
  * @param {any} data
  * @param {boolean} isSuccess
  * @return {*} result
@@ -65,7 +65,7 @@ export function handleServiceResult(data: any, isSuccess: boolean = true) {
 }
 
 /**
- * @description: 处理接口token刷新
+ * @description: Process interface token refresh
  * @return {*}
  */
 export async function handleRefreshToken() {
@@ -76,20 +76,20 @@ export async function handleRefreshToken() {
     return
   }
 
-  // 刷新token
+  // Refresh token
   const { data } = await fetchUpdateToken({ refreshToken: local.get('refreshToken') })
   if (data) {
     local.set('accessToken', data.accessToken)
     local.set('refreshToken', data.refreshToken)
   }
   else {
-    // 刷新失败，退出
+    // Refresh failed, exit
     await authStore.logout()
   }
 }
 
 export function showError(error: Service.RequestError) {
-  // 如果error不需要提示,则跳过
+  // If ERROR does not need to prompt, skip
   const code = Number(error.code)
   if (ERROR_NO_TIP_STATUS.includes(code))
     return

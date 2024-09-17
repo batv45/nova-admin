@@ -44,9 +44,9 @@ type ModalType = 'add' | 'view' | 'edit'
 const modalType = shallowRef<ModalType>('add')
 const modalTitle = computed(() => {
   const titleMap: Record<ModalType, string> = {
-    add: '添加',
-    view: '查看',
-    edit: '编辑',
+    add: 'Add to',
+    view: 'Check',
+    edit: 'edit',
   }
   return `${titleMap[modalType.value]}${modalName}`
 })
@@ -90,7 +90,7 @@ async function submitModal() {
     async add() {
       return new Promise((resolve) => {
         setTimeout(() => {
-          window.$message.success('模拟新增成功')
+          window.$message.success('Simulation new success')
           resolve(true)
         }, 2000)
       })
@@ -98,7 +98,7 @@ async function submitModal() {
     async edit() {
       return new Promise((resolve) => {
         setTimeout(() => {
-          window.$message.success('模拟编辑成功')
+          window.$message.success('Simulation edit')
           resolve(true)
         }, 2000)
       })
@@ -133,13 +133,13 @@ function filterDirectory(node: any[]) {
 const rules = {
   name: {
     required: true,
-    // message: '请输入菜单名称',
+    // message: 'Please enter the menu name',
     validator(rule: FormItemRule, value: string) {
       if (!value)
-        return new Error('请输入菜单名称')
+        return new Error('Please enter the menu name')
 
       if (!new RegExp(Regex.RouteName).test(value))
-        return new Error('菜单只能包含英文数字_!@#$%^&*~-')
+        return new Error('The menu can only contain English numbers_!@#$%^&*~-')
 
       return true
     },
@@ -147,17 +147,17 @@ const rules = {
   },
   path: {
     required: true,
-    message: '请输入菜单路径',
+    message: 'Please enter the menu road',
     trigger: 'blur',
   },
   componentPath: {
     required: true,
-    message: '请输入组件路径',
+    message: 'Please enter the component path',
     trigger: 'blur',
   },
   title: {
     required: true,
-    message: '请输入菜单标题',
+    message: 'Please enter the menu title',
     trigger: 'blur',
   },
 }
@@ -186,74 +186,74 @@ async function getRoleList() {
       <n-grid :cols="2" :x-gap="18">
         <n-form-item-grid-item :span="2" path="pid">
           <template #label>
-            父级目录
-            <HelpInfo message="不填写则为顶层菜单" />
+            Parent directory
+            <HelpInfo message="If you don't fill it out, it is the top menu" />
           </template>
           <n-tree-select
             v-model:value="formModel.pid" filterable clearable :options="dirTreeOptions" key-field="id"
-            label-field="title" children-field="children" placeholder="请选择父级目录"
+            label-field="title" children-field="children" placeholder="Please select the parent directory"
           />
         </n-form-item-grid-item>
-        <n-form-item-grid-item :span="1" label="菜单名称" path="name">
+        <n-form-item-grid-item :span="1" label="Menu name" path="name">
           <n-input v-model:value="formModel.name" placeholder="Eg: system" />
         </n-form-item-grid-item>
-        <n-form-item-grid-item :span="1" label="标题" path="title">
+        <n-form-item-grid-item :span="1" label="title" path="title">
           <n-input v-model:value="formModel.title" placeholder="Eg: My-System" />
         </n-form-item-grid-item>
-        <n-form-item-grid-item :span="2" label="路由路径" path="path">
+        <n-form-item-grid-item :span="2" label="Route" path="path">
           <n-input v-model:value="formModel.path" placeholder="Eg: /system/user" />
         </n-form-item-grid-item>
-        <n-form-item-grid-item :span="1" label="菜单类型" path="menuType">
+        <n-form-item-grid-item :span="1" label="Menu" path="menuType">
           <n-radio-group v-model:value="formModel.menuType" name="radiogroup">
             <n-space>
               <n-radio value="dir">
-                目录
+                Table of contents
               </n-radio>
               <n-radio value="page">
-                页面
+                page
               </n-radio>
             </n-space>
           </n-radio-group>
         </n-form-item-grid-item>
-        <n-form-item-grid-item :span="1" label="图标" path="icon">
+        <n-form-item-grid-item :span="1" label="icon" path="icon">
           <icon-select v-model:value="formModel.icon" :disabled="modalType === 'view'" />
         </n-form-item-grid-item>
-        <n-form-item-grid-item v-if="formModel.menuType === 'page'" :span="2" label="组件路径" path="componentPath">
+        <n-form-item-grid-item v-if="formModel.menuType === 'page'" :span="2" label="Component path" path="componentPath">
           <n-input v-model:value="formModel.componentPath" placeholder="Eg: /system/user/index.vue" />
         </n-form-item-grid-item>
         <n-form-item-grid-item :span="1" path="order">
           <template #label>
-            菜单排序
-            <HelpInfo message="数字越小，同级中越靠前" />
+            Menu sorting
+            <HelpInfo message="The smaller the number, the higher the same level, China" />
           </template>
           <n-input-number v-model:value="formModel.order" />
         </n-form-item-grid-item>
         <n-form-item-grid-item v-if="formModel.menuType === 'page'" :span="1" path="href">
           <template #label>
-            外链页面
-            <HelpInfo message="填写后，点击菜单将跳转到该地址，组件路径任意填写" />
+            Outer chain page
+            <HelpInfo message="After filling in, click the menu to jump to the address." />
           </template>
           <n-input v-model:value="formModel.href" placeholder="Eg: https://example.com" />
         </n-form-item-grid-item>
-        <n-form-item-grid-item :span="1" label="登录访问" path="requiresAuth">
+        <n-form-item-grid-item :span="1" label="Log in" path="requiresAuth">
           <n-switch v-model:value="formModel.requiresAuth" />
         </n-form-item-grid-item>
         <n-form-item-grid-item
-          v-if="formModel.menuType === 'page'" :span="1" label="页面缓存"
+          v-if="formModel.menuType === 'page'" :span="1" label="Page cache"
           path="keepAlive"
         >
           <n-switch v-model:value="formModel.keepAlive" />
         </n-form-item-grid-item>
         <n-form-item-grid-item
-          v-if="formModel.menuType === 'page'" :span="1" label="标签栏可见"
+          v-if="formModel.menuType === 'page'" :span="1" label="Tag bar can be visible"
           path="withoutTab"
         >
           <n-switch v-model:value="formModel.withoutTab" />
         </n-form-item-grid-item>
-        <n-form-item-grid-item v-if="formModel.menuType === 'page'" :span="1" label="常驻标签栏" path="pinTab">
+        <n-form-item-grid-item v-if="formModel.menuType === 'page'" :span="1" label="Resident label bar" path="pinTab">
           <n-switch v-model:value="formModel.pinTab" />
         </n-form-item-grid-item>
-        <n-form-item-grid-item :span="1" label="侧边菜单隐藏" path="hide">
+        <n-form-item-grid-item :span="1" label="Side menu hiding" path="hide">
           <n-switch v-model:value="formModel.hide" />
         </n-form-item-grid-item>
         <n-form-item-grid-item
@@ -261,15 +261,15 @@ async function getRoleList() {
           path="activeMenu"
         >
           <template #label>
-            高亮菜单
-            <HelpInfo message="当前路由不在左侧菜单显示，但需要高亮某个菜单" />
+            Highlight menu
+            <HelpInfo message="The current route is not displayed on the left menu, but it needs to be highlighted in a menu" />
           </template>
           <n-input v-model:value="formModel.activeMenu" />
         </n-form-item-grid-item>
         <n-form-item-grid-item :span="2" path="roles">
           <template #label>
-            访问角色
-            <HelpInfo message="不填写则表示所有角色都可以访问" />
+            Access role
+            <HelpInfo message="Without filling, it means that all characters can be accessed" />
           </template>
           <n-select
             v-model:value="formModel.roles" multiple filterable
@@ -283,10 +283,10 @@ async function getRoleList() {
     <template v-if="modalType !== 'view'" #action>
       <n-space justify="center">
         <n-button @click="closeModal">
-          取消
+          Cancel
         </n-button>
         <n-button type="primary" :loading="submitLoading" @click="submitModal">
-          提交
+          Submit
         </n-button>
       </n-space>
     </template>

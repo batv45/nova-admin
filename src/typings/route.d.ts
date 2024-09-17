@@ -1,63 +1,63 @@
 declare namespace AppRoute {
 
   type MenuType = 'dir' | 'page'
-  /** 单个路由所携带的meta标识 */
+  /** Meta logo carried by a single route */
   interface RouteMeta {
-    /* 页面标题，通常必选。 */
+    /* Page title, usually optional. */
     title: string
-    /* 图标，一般配合菜单使用 */
+    /* Icon, generally combined with menu use */
     icon?: string
-    /* 是否需要登录权限。 */
+    /* Do you need login permissions. */
     requiresAuth?: boolean
-    /* 可以访问的角色 */
+    /* The character that can be accessed */
     roles?: Entity.RoleType[]
-    /* 是否开启页面缓存 */
+    /* Whether to turn on the page cache */
     keepAlive?: boolean
-    /* 有些路由我们并不想在菜单中显示，比如某些编辑页面。 */
+    /* Some routes do not want to display in the menu, such as some editing pages. */
     hide?: boolean
-    /* 菜单排序。 */
+    /* Menu sort. */
     order?: number
-    /* 嵌套外链  */
+    /* Outer chain  */
     href?: string
-    /** 当前路由不在左侧菜单显示，但需要高亮某个菜单的情况 */
+    /** The current routing is not displayed on the left menu, but the situation of the menu is required to be highlighted */
     activeMenu?: string
-    /** 当前路由是否会被添加到Tab中 */
+    /** Whether the current routing will be added to the tab */
     withoutTab?: boolean
-    /** 当前路由是否会被固定在Tab中,用于一些常驻页面 */
+    /** Whether the current routing will be fixed in TAB and used for some resident page */
     pinTab?: boolean
-    /** 当前路由在左侧菜单是目录还是页面,不设置默认为page */
+    /** The current routing is the directory or page on the left menu, without setting the default default Page */
     menuType?: MenuType
   }
 
   type MetaKeys = keyof RouteMeta
 
   interface baseRoute {
-    /** 路由名称(路由唯一标识) */
+    /** Route name (the unique logo of the routing) */
     name: string
-    /** 路由路径 */
+    /** Route */
     path: string
-    /** 路由重定向 */
+    /** Route redirection */
     redirect?: string
-    /* 页面组件地址 */
+    /* Page component address */
     componentPath?: string | null
-    /* 路由id */
+    /* Routing ID */
     id: number
-    /* 父级路由id，顶级页面为null */
+    /* Father -level route ID, top page is null */
     pid: number | null
   }
 
-  /** 单个路由的类型结构(动态路由模式：后端返回此类型结构的路由) */
+  /** Type structure of a single routing (dynamic routing mode: route back to this type of structure) */
   type RowRoute = RouteMeta & baseRoute
 
   /**
-   * 挂载到项目上的真实路由结构
+   * The real routing structure of mounting to the project
    */
   interface Route extends baseRoute {
-    /** 子路由 */
+    /** Sub -route */
     children?: Route[]
-    /* 页面组件 */
+    /* Page component */
     component: any
-    /** 路由描述 */
+    /** Routing description */
     meta: RouteMeta
   }
 

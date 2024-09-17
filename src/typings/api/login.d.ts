@@ -2,15 +2,15 @@
 
 namespace Api {
   namespace Login {
-    /* 登录返回的用户字段, 该数据是根据用户表扩展而来, 部分字段可能需要覆盖，例如id */
+    /* Log in to the user field returned, which is based on the user table expansion. Some fields may need to be covered, such as ID */
     interface Info extends Entity.User {
-      /** 用户id */
+      /** User ID */
       id: number
-      /** 用户角色类型 */
+      /** User character type */
       role: Entity.RoleType
-      /** 访问toekn */
+      /** Visit token */
       accessToken: string
-      /** 刷新toekn */
+      /** Refresh token */
       refreshToken: string
     }
   }

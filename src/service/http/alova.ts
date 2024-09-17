@@ -15,17 +15,17 @@ import {
 } from './handle'
 
 const { onAuthRequired, onResponseRefreshToken } = createServerTokenAuthentication<VueHookType>({
-  // 服务端判定token过期
+  // The server judge the token expires
   refreshTokenOnSuccess: {
-    // 当服务端返回401时，表示token过期
+    // When the server returns 401, it means that the token expires
     isExpired: (response, method) => {
       const isExpired = method.meta && method.meta.isExpired
       return response.status === 401 && !isExpired
     },
 
-    // 当token过期时触发，在此函数中触发刷新token
+    // When the token expires, it triggers to refresh token in this function
     handler: async (_response, method) => {
-      // 此处采取限制，防止过期请求无限循环重发
+      // Take restrictions here to prevent the expired request from unlimited circulation
       if (!method.meta)
         method.meta = { isExpired: true }
       else
@@ -34,7 +34,7 @@ const { onAuthRequired, onResponseRefreshToken } = createServerTokenAuthenticati
       await handleRefreshToken()
     },
   },
-  // 添加token到请求头
+  // Add token to the request header
   assignToken: (method) => {
     method.config.headers.Authorization = `Bearer ${local.get('accessToken')}`
   },
@@ -63,26 +63,26 @@ export function createAlovaInstance(
       alovaConfig.beforeRequest?.(method)
     }),
     responded: onResponseRefreshToken({
-      // 请求成功的拦截器
+      // The interceptor that requests a successful request
       onSuccess: async (response, method) => {
         const { status } = response
 
         if (status === 200) {
-          // 返回blob数据
+          // Return to blob data
           if (method.meta?.isBlob)
             return response.blob()
 
-          // 返回json数据
+          // Return to JSON data
           const apiData = await response.json()
-          // 请求成功
+          // Successful request
           if (apiData[_backendConfig.codeKey] === _backendConfig.successCode)
             return handleServiceResult(apiData)
 
-          // 业务请求失败
+          // Failure for business requests
           const errorResult = handleBusinessError(apiData, _backendConfig)
           return handleServiceResult(errorResult, false)
         }
-        // 接口请求失败
+        // Interface request failure
         const errorResult = handleResponseError(response)
         return handleServiceResult(errorResult, false)
       },
@@ -92,7 +92,7 @@ export function createAlovaInstance(
       },
 
       onComplete: async (_method) => {
-        // 处理请求完成逻辑
+        // Processing request complete logic
       },
     }),
   })

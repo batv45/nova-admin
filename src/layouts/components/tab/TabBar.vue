@@ -30,6 +30,10 @@ const options = computed(() => {
       icon: () => h(IconRedo),
     },
     {
+      type: 'divider',
+      key: 'd1',
+    },
+    {
       label: t('common.close'),
       key: 'closeCurrent',
       icon: () => h(IconClose),
@@ -38,6 +42,10 @@ const options = computed(() => {
       label: t('app.closeOther'),
       key: 'closeOther',
       icon: () => h(IconDelete),
+    },
+    {
+      type: 'divider',
+      key: 'd2',
     },
     {
       label: t('app.closeLeft'),
@@ -117,6 +125,7 @@ function onClickoutside() {
         :key="item.path"
         :name="item.path"
         @click="router.push(item.path)"
+        @contextmenu.prevent="false"
       >
         <div class="flex-x-center gap-2">
           <nova-icon :icon="item.meta.icon" /> {{ $t(`route.${String(item.name)}`, item.meta.title) }}

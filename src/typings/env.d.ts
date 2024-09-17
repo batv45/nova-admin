@@ -1,39 +1,39 @@
 /**
- *后台服务的环境类型
- * - dev: 后台开发环境
- * - test: 后台测试环境
- * - prod: 后台生产环境
+ *Environment type of background service
+ * - dev: Background development environment
+ * - test: Background test environment
+ * - prod: Background production environment
  */
 type ServiceEnvType = 'dev' | 'test' | 'prod'
 
 interface ImportMetaEnv {
-  /** 项目基本地址 */
+  /** Project basic address */
   readonly VITE_BASE_URL: string
-  /** 项目标题 */
+  /** Project title */
   readonly VITE_APP_NAME: string
-  /** 开启请求代理 */
+  /** Open the request agent */
   readonly VITE_HTTP_PROXY?: 'Y' | 'N'
-  /** 是否开启打包压缩 */
+  /** Whether to turn on packing and compression */
   readonly VITE_BUILD_COMPRESS?: 'Y' | 'N'
-  /** 压缩算法类型 */
+  /** Compression algorithm type */
   readonly VITE_COMPRESS_TYPE?:
     | 'gzip'
     | 'brotliCompress'
     | 'deflate'
     | 'deflateRaw'
-  /** 路由模式 */
+  /** Routing mode */
   readonly VITE_ROUTE_MODE?: 'hash' | 'web'
-  /** 路由加载模式 */
+  /** Routing loading mode */
   readonly VITE_ROUTE_LOAD_MODE: 'static' | 'dynamic'
-  /** 首次加载页面 */
+  /** Loading page for the first time */
   readonly VITE_HOME_PATH: string
-  /** 版权信息 */
+  /** Copyright information */
   readonly VITE_COPYRIGHT_INFO: string
   /** 是否自动刷新token */
   readonly VITE_AUTO_REFRESH_TOKEN: 'Y' | 'N'
-  /** 默认语言 */
+  /** Default language */
   readonly VITE_DEFAULT_LANG: App.lang
-  /** 后端服务的环境类型 */
+  /** Environment type of back -end service */
   readonly MODE: ServiceEnvType
 }
 

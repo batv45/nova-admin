@@ -2,7 +2,7 @@ import type { App } from 'vue'
 import { local } from '@/utils/storage'
 import { createI18n } from 'vue-i18n'
 import enUS from '../../locales/en_US.json'
-import zhCN from '../../locales/zh_CN.json'
+import trTR from '../../locales/tr_TR.json'
 
 const { VITE_DEFAULT_LANG } = import.meta.env
 
@@ -11,7 +11,7 @@ export const i18n = createI18n({
   locale: local.get('lang') || VITE_DEFAULT_LANG, // Display language by default
   fallbackLocale: VITE_DEFAULT_LANG,
   messages: {
-    zhCN,
+    trTR,
     enUS,
   },
   // Lack of international keys warning

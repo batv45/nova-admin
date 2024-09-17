@@ -1,15 +1,15 @@
 import { blankInstance, request } from '../http'
 
-/* get方法测试 */
+/* GET method test */
 export function fetchGet(params?: any) {
   return request.Get('/getAPI', { params })
 }
 
-/* post方法测试 */
+/* POST method test */
 export function fetchPost(data: any) {
   return request.Post('/postAPI', data)
 }
-/* formPost方法测试 */
+/* Formpost method test */
 export function fetchFormPost(data: any) {
   const methodInstance = request.Post('/postFormAPI', data)
   methodInstance.meta = {
@@ -17,15 +17,15 @@ export function fetchFormPost(data: any) {
   }
   return methodInstance
 }
-/* delete方法测试 */
+/* delete method test */
 export function fetchDelete() {
   return request.Delete('/deleteAPI')
 }
-/* put方法测试 */
+/* PUT method test */
 export function fetchPut(data: any) {
   return request.Put('/putAPI', data)
 }
-/* 不携带token的接口 */
+/* Interface that does not carry Token */
 export function withoutToken() {
   const methodInstance = request.Get('/getAPI')
   methodInstance.meta = {
@@ -33,7 +33,7 @@ export function withoutToken() {
   }
   return methodInstance
 }
-/* 接口数据转换 */
+/* Interface data conversion */
 export function dictData() {
   return request.Get('/getDictData', {
     transform(rawData, _headers) {
@@ -49,43 +49,43 @@ export function dictData() {
     },
   })
 }
-/* 模拟获取二进制文件 */
+/* Simten to obtain binary files */
 export function getBlob(url: string) {
   const methodInstance = blankInstance.Get<Blob>(url)
   methodInstance.meta = {
-    // 标识为blob数据
+    // The identification is blob data
     isBlob: true,
   }
   return methodInstance
 }
 
-/* 带进度的下载文件 */
+/* Download file with progress */
 export function downloadFile(url: string) {
   const methodInstance = blankInstance.Get<Blob>(url)
   methodInstance.meta = {
-    // 标识为blob数据
+    // The identification is blob data
     isBlob: true,
   }
   return methodInstance
 }
-/* 测试状态码500失败 */
+/* Test status code 500 failed */
 export function FailedRequest() {
   return request.Get('/serverError')
 }
 
-/* 测试业务码500失败 */
+/* Test business code 500 failed */
 export function FailedResponse() {
   return request.Post('/businessError')
 }
-/* 测试业务码10000失败,无提示 */
+/* Test business code 10000 failed,无提示 */
 export function FailedResponseWithoutTip() {
   return request.Post('/businessErrorWithoutTip')
 }
-/* token失效的接口 */
+/* Token failed interface */
 export function expiredTokenRequest() {
   return request.Get('/expiredToken')
 }
-/* 测试token刷新接口 */
+/* Test the token refresh interface */
 export function refreshToken() {
   return request.Get('/updataToken')
 }

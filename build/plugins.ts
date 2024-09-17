@@ -13,8 +13,8 @@ import viteCompression from 'vite-plugin-compression'
 import VueDevTools from 'vite-plugin-vue-devtools'
 
 /**
- * @description: 设置vite插件配置
- * @param {*} env - 环境变量配置
+ * @description: Set the VITE plug -in configurationTE plug -in configuration
+ * @param {*} env - Environment variable configuration
  * @return {*}
  */
 export function createVitePlugins(env: ImportMetaEnv) {
@@ -84,7 +84,7 @@ export function createVitePlugins(env: ImportMetaEnv) {
   if (env.VITE_BUILD_COMPRESS === 'Y') {
     const { VITE_COMPRESS_TYPE = 'gzip' } = env
     plugins.push(viteCompression({
-      algorithm: VITE_COMPRESS_TYPE, // 压缩算法
+      algorithm: VITE_COMPRESS_TYPE, // Compression algorithm
     }))
   }
 

@@ -53,7 +53,7 @@ export const useAppStore = defineStore('app-store', {
     },
   },
   actions: {
-    // 重置所有设置
+    // Reset all settings
     resetAlltheme() {
       this.theme = themeConfig
       this.primaryColor = '#18a058'
@@ -71,7 +71,7 @@ export const useAppStore = defineStore('app-store', {
       this.layoutMode = 'leftMenu'
       this.contentFullScreen = false
 
-      // 重置所有配色
+      // Reset all color schemes
       this.setPrimaryColor(this.primaryColor)
     },
     setAppLang(lang: App.lang) {
@@ -79,7 +79,7 @@ export const useAppStore = defineStore('app-store', {
       local.set('lang', lang)
       this.lang = lang
     },
-    /* 设置主题色 */
+    /* Set the theme color */
     setPrimaryColor(color: string) {
       const brightenColor = colord(color).lighten(0.05).toHex()
       const darkenColor = colord(color).darken(0.05).toHex()
@@ -91,17 +91,17 @@ export const useAppStore = defineStore('app-store', {
     setColorMode(mode: 'light' | 'dark' | 'auto') {
       store.value = mode
     },
-    /* 切换侧边栏收缩 */
+    /* Switch the sidebar to shrink */
     toggleCollapse() {
       this.collapsed = !this.collapsed
     },
-    /* 切换全屏 */
+    /* Switch full screen */
     toggleFullScreen() {
       toggle()
     },
     /**
-     * @description: 页面内容重载
-     * @param {number} delay - 延迟毫秒数
+     * @description: Page content heavy load
+     * @param {number} delay - Delay millilitrimum number
      * @return {*}
      */
     async reloadPage(delay = 600) {
@@ -116,12 +116,12 @@ export const useAppStore = defineStore('app-store', {
         this.loadFlag = true
       }
     },
-    /* 切换色弱模式 */
+    /* Switch color weak mode */
     toggleColorWeak() {
       docEle.value.classList.toggle('color-weak')
       this.colorWeak = docEle.value.classList.contains('color-weak')
     },
-    /* 切换灰色模式 */
+    /* Switch gray mode */
     toggleGrayMode() {
       docEle.value.classList.toggle('gray-mode')
       this.grayMode = docEle.value.classList.contains('gray-mode')

@@ -90,7 +90,7 @@ function setRedirect(routes: AppRoute.Route[]) {
   })
 }
 
-/* 生成侧边菜单的数据 */
+/* Data to generate the side menu */
 export function createMenus(userRoutes: AppRoute.RowRoute[]) {
   const resultMenus = standardizedRoutes(userRoutes)
 

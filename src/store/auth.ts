@@ -16,26 +16,26 @@ export const useAuthStore = defineStore('auth-store', {
     }
   },
   getters: {
-    /** 是否登录 */
+    /** Whether to log in */
     isLogin(state) {
       return Boolean(state.token)
     },
   },
   actions: {
-    /* 登录退出，重置用户信息等 */
+    /* Log in to exit, reset user information, etc. */
     async logout() {
       const route = unref(router.currentRoute)
-      // 清除本地缓存
+      // Clear local cache
       this.clearAuthStorage()
-      // 清空路由、菜单等数据
+      // Data such as clearing routes, menu and other data
       const routeStore = useRouteStore()
       routeStore.resetRouteStore()
-      // 清空标签栏数据
+      // Clear the label bar data
       const tabStore = useTabStore()
       tabStore.clearAllTabs()
-      // 重置当前存储库
+      // Reset the current repository
       this.$reset()
-      // 重定向到登录页
+      // Reset to the login page
       if (route.meta.requiresAuth) {
         router.push({
           name: 'login',
@@ -51,14 +51,14 @@ export const useAuthStore = defineStore('auth-store', {
       local.remove('userInfo')
     },
 
-    /* 用户登录 */
+    /* User login */
     async login(userName: string, password: string) {
       try {
         const { isSuccess, data } = await fetchLogin({ userName, password })
         if (!isSuccess)
           return
 
-        // 处理登录信息
+        // Process login information
         await this.handleLoginInfo(data)
       }
       catch (e) {
@@ -66,20 +66,20 @@ export const useAuthStore = defineStore('auth-store', {
       }
     },
 
-    /* 处理登录返回的数据 */
+    /* Process data returned by login */
     async handleLoginInfo(data: Api.Login.Info) {
-      // 将token和userInfo保存下来
+      // Save the Token and UserInfo
       local.set('userInfo', data)
       local.set('accessToken', data.accessToken)
       local.set('refreshToken', data.refreshToken)
       this.token = data.accessToken
       this.userInfo = data
 
-      // 添加路由和菜单
+      // Add route and menu
       const routeStore = useRouteStore()
       await routeStore.initAuthRoute()
 
-      // 进行重定向跳转
+      // Rotate the redirection
       const route = unref(router.currentRoute)
       const query = route.query as { redirect: string }
       router.push({

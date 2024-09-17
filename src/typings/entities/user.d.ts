@@ -1,27 +1,27 @@
 /// <reference path="../global.d.ts"/>
 
-/** 用户数据库表字段 */
+/** User database table field */
 namespace Entity {
   interface User {
-    /** 用户id */
+    /** User ID */
     id?: number
-    /** 用户名 */
+    /** username */
     userName?: string
-    /* 用户头像 */
+    /* User avatar */
     avatar?: string
-    /* 用户性别 */
+    /* Gender */
     gender?: 0 | 1
-    /* 用户邮箱 */
+    /* User mailbox */
     email?: string
-    /* 用户昵称 */
+    /* User nickname */
     nickname?: string
-    /* 用户电话 */
+    /* User phone call */
     tel?: string
-    /** 用户角色类型 */
+    /** User character type */
     role?: Entity.RoleType[]
-    /** 用户状态 */
+    /** User status */
     status?: 0 | 1
-    /** 备注 */
+    /** Remark */
     remark?: string
   }
 

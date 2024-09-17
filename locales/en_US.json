@@ -156,5 +156,11 @@
       "message": "Copied successfully",
       "tooltip": "Copy"
     }
-  }
+  },
+  "gender": {
+    "female": "female",
+    "male": "male"
+  },
+  "male": "Male",
+  "female": "female"
 }

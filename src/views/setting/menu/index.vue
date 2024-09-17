@@ -10,7 +10,7 @@ import TableModal from './components/TableModal.vue'
 const { bool: loading, setTrue: startLoading, setFalse: endLoading } = useBoolean(false)
 
 function deleteData(id: number) {
-  window.$message.success(`删除菜单id:${id}`)
+  window.$message.success(`Delete menu ID:${id}`)
 }
 
 const tableModalRef = ref()
@@ -26,7 +26,7 @@ const columns: DataTableColumns<AppRoute.RowRoute> = [
     width: 200,
   },
   {
-    title: '图标',
+    title: 'icon',
     align: 'center',
     key: 'icon',
     width: '6em',
@@ -35,7 +35,7 @@ const columns: DataTableColumns<AppRoute.RowRoute> = [
     },
   },
   {
-    title: '标题',
+    title: 'title',
     align: 'center',
     key: 'title',
     ellipsis: {
@@ -43,7 +43,7 @@ const columns: DataTableColumns<AppRoute.RowRoute> = [
     },
   },
   {
-    title: '路径',
+    title: 'path',
     key: 'path',
     render: (row) => {
       return (
@@ -52,7 +52,7 @@ const columns: DataTableColumns<AppRoute.RowRoute> = [
     },
   },
   {
-    title: '组件路径',
+    title: 'Component path',
     key: 'componentPath',
     ellipsis: {
       tooltip: true,
@@ -62,13 +62,13 @@ const columns: DataTableColumns<AppRoute.RowRoute> = [
     },
   },
   {
-    title: '排序值',
+    title: 'Sort value',
     key: 'order',
     align: 'center',
     width: '6em',
   },
   {
-    title: '菜单类型',
+    title: 'Menu',
     align: 'center',
     key: 'menuType',
     width: '6em',
@@ -82,7 +82,7 @@ const columns: DataTableColumns<AppRoute.RowRoute> = [
     },
   },
   {
-    title: '操作',
+    title: 'operate',
     align: 'center',
     key: 'actions',
     width: '15em',
@@ -93,17 +93,17 @@ const columns: DataTableColumns<AppRoute.RowRoute> = [
             size="small"
             onClick={() => tableModalRef.value.openModal('view', row)}
           >
-            查看
+            Check
           </NButton>
           <NButton
             size="small"
             onClick={() => tableModalRef.value.openModal('edit', row)}
           >
-            编辑
+            Edit
           </NButton>
           <NPopconfirm onPositiveClick={() => deleteData(row.id)}>
             {{
-              default: () => '确认删除',
+              default: () => 'Confirm delete',
               trigger: () => <NButton size="small" type="error">删除</NButton>,
             }}
           </NPopconfirm>
@@ -127,7 +127,7 @@ async function getAllRoutes() {
 
 const checkedRowKeys = ref<number[]>([])
 async function handlePositiveClick() {
-  window.$message.success(`批量删除id:${checkedRowKeys.value.join(',')}`)
+  window.$message.success(`Batch delete ID:${checkedRowKeys.value.join(',')}`)
 }
 </script>
 
@@ -138,7 +138,7 @@ async function handlePositiveClick() {
         <template #icon>
           <icon-park-outline-add-one />
         </template>
-        新建
+        Newly built
       </NButton>
     </template>
 
@@ -148,7 +148,7 @@ async function handlePositiveClick() {
           <template #icon>
             <icon-park-outline-refresh />
           </template>
-          刷新
+          refresh
         </NButton>
         <NPopconfirm
           @positive-click="handlePositiveClick"
@@ -158,10 +158,10 @@ async function handlePositiveClick() {
               <template #icon>
                 <icon-park-outline-delete-five />
               </template>
-              批量删除
+              Batch deletion
             </NButton>
           </template>
-          确认删除所有选中菜单？
+          Confirm that delete all selected menus?
         </NPopconfirm>
       </n-flex>
     </template>
@@ -172,6 +172,6 @@ async function handlePositiveClick() {
       size="small"
       :scroll-x="1200"
     />
-    <TableModal ref="tableModalRef" :all-routes="tableData" modal-name="菜单" />
+    <TableModal ref="tableModalRef" :all-routes="tableData" modal-name="menu" />
   </n-card>
 </template>

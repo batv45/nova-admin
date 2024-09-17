@@ -1,11 +1,11 @@
-// 系列类型的定义后缀都为 SeriesOption
+// The definition suffixes of the series types are seriesOption
 import type {
   BarSeriesOption,
   LineSeriesOption,
   PieSeriesOption,
   RadarSeriesOption,
 } from 'echarts/charts'
-// 组件类型的定义后缀都为 ComponentOption
+// The definition of the component type is componentOption
 import type {
   DatasetComponentOption,
   GridComponentOption,
@@ -18,13 +18,13 @@ import { useAppStore } from '@/store'
 import { BarChart, LineChart, PieChart, RadarChart } from 'echarts/charts'
 
 import {
-  DatasetComponent, // 数据集组件
+  DatasetComponent, // Data set component
   GridComponent,
   LegendComponent,
   TitleComponent,
   ToolboxComponent,
   TooltipComponent,
-  TransformComponent, // 内置数据转换器组件 (filter, sort)
+  TransformComponent, // Built -in data converter component (filter, sort)
 } from 'echarts/components'
 import * as echarts from 'echarts/core'
 
@@ -32,7 +32,7 @@ import { LabelLayout, UniversalTransition } from 'echarts/features'
 import { CanvasRenderer } from 'echarts/renderers'
 import { useTemplateRef } from 'vue'
 
-// 通过 ComposeOption 来组合出一个只有必须组件和图表的 Option 类型
+// By ComposeOption to combine a type of Option of only components and charts
 export type ECOption = echarts.ComposeOption<
   | BarSeriesOption
   | PieSeriesOption
@@ -46,7 +46,7 @@ export type ECOption = echarts.ComposeOption<
   | RadarSeriesOption
 >
 
-// 注册必须的组件
+// Register the necessary component
 echarts.use([
   TitleComponent,
   TooltipComponent,
@@ -65,8 +65,8 @@ echarts.use([
 ])
 
 /**
- * Echarts hooks函数
- * @description 按需引入图表组件，没注册的组件需要先引入
+ * ECharts Hooks function
+ * @description The chart component is introduced as required.
  */
 export function useEcharts(ref: string, chartOptions: Ref<ECOption>) {
   const el = useTemplateRef<HTMLLIElement>(ref)
@@ -80,7 +80,7 @@ export function useEcharts(ref: string, chartOptions: Ref<ECOption>) {
   const isRendered = computed(() => Boolean(el && chart))
 
   async function render() {
-    // 宽或高不存在时不渲染
+    // Wide or high without rendering when there is no existence
     if (!width || !height)
       return
 

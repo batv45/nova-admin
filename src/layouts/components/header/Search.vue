@@ -4,15 +4,15 @@ import { useRouteStore } from '@/store'
 
 const routeStore = useRouteStore()
 
-// 搜索值
+// Search value
 const searchValue = ref('')
 
-// 选中索引
+// Select index
 const selectedIndex = ref<number>(0)
 
 const { bool: showModal, setTrue: openModal, setFalse: closeModal, toggle: toggleModal } = useBoolean(false)
 
-// 鼠标和键盘操作切换锁，防止鼠标和键盘操作冲突
+// Mouse and keyboard operation switching locks to prevent conflicts between mouse and keyboard operation
 const { bool: keyboardFlag, setTrue: setKeyboardTrue, setFalse: setKeyboardFalse } = useBoolean(false)
 
 const { ctrl_k, arrowup, arrowdown, enter/* keys you want to monitor */ } = useMagicKeys({
@@ -23,7 +23,7 @@ const { ctrl_k, arrowup, arrowdown, enter/* keys you want to monitor */ } = useM
   },
 })
 
-// 监听全局热键
+// Surveying global hot key
 watchEffect(() => {
   if (ctrl_k.value)
     toggleModal()
@@ -31,7 +31,7 @@ watchEffect(() => {
 
 const { t } = useI18n()
 
-// 计算符合条件的菜单选项
+// Calculate qualified menu options
 const options = computed(() => {
   if (!searchValue.value)
     return []
@@ -53,19 +53,19 @@ const options = computed(() => {
 
 const router = useRouter()
 
-// 关闭回调
+// Turn off
 function handleClose() {
   searchValue.value = ''
   selectedIndex.value = 0
   closeModal()
 }
 
-// 输入框改变，索引重置
+// Change the input box, index reset
 function handleInputChange() {
   selectedIndex.value = 0
 }
 
-// 选择菜单选项
+// Select menu options
 function handleSelect(value: string) {
   handleClose()
   router.push(value)
@@ -75,11 +75,11 @@ function handleSelect(value: string) {
 }
 
 watchEffect(() => {
-  // 没有打开弹窗或没有搜索结果时，不操作
+  // Do not operate when you don’t open the pop -up window or no search results
   if (!showModal.value || !options.value.length)
     return
 
-  // 设置键盘操作锁，设置后不会被动触发mouseover
+  // Set the keyboard operation lock, and the Mouseover will not passively triggered after setting
   setKeyboardTrue()
   if (arrowup.value)
     handleArrowup()
@@ -93,7 +93,7 @@ watchEffect(() => {
 
 const scrollbarRef = ref()
 
-// 上箭头操作
+// Arrow operation
 function handleArrowup() {
   if (selectedIndex.value === 0)
     selectedIndex.value = options.value.length - 1
@@ -104,7 +104,7 @@ function handleArrowup() {
   handleScroll(selectedIndex.value)
 }
 
-// 下箭头操作
+// Lower arrow operation
 function handleArrowdown() {
   if (selectedIndex.value === options.value.length - 1)
     selectedIndex.value = 0
@@ -116,23 +116,23 @@ function handleArrowdown() {
 }
 
 function handleScroll(currentIndex: number) {
-  // 保持6个选项在可视区域内,6个后开始滚动
+  // Keep 6 options in the visual area, and start rolling after 6
   const keepIndex = 5
-  // 单个元素的高度，包括了元素的gap和容器的padding
+  // The height of a single element includes the element Gap and the padding of the container
   const elHeight = 70
   const distance = currentIndex * elHeight > keepIndex * elHeight ? currentIndex * elHeight - keepIndex * elHeight : 0
   scrollbarRef.value?.scrollTo({
     top: distance,
   })
 }
-// 回车键操作
+// Enter key operation
 function handleEnter() {
   const target = options.value[selectedIndex.value]
   if (target)
     handleSelect(target.value)
 }
 
-// 鼠标移入操作
+// Mouse movement operation
 function handleMouseEnter(index: number) {
   if (keyboardFlag.value)
     return

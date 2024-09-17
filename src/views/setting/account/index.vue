@@ -22,17 +22,17 @@ const formRef = ref<FormInst | null>()
 const modalRef = ref()
 
 function delteteUser(id: number) {
-  window.$message.success(`删除用户id:${id}`)
+  window.$message.success(`Delete user ID:${id}`)
 }
 
 const columns: DataTableColumns<Entity.User> = [
   {
-    title: '姓名',
+    title: 'Name',
     align: 'center',
     key: 'userName',
   },
   {
-    title: '性别',
+    title: 'gender',
     align: 'center',
     key: 'gender',
     render: (row) => {
@@ -50,12 +50,12 @@ const columns: DataTableColumns<Entity.User> = [
     },
   },
   {
-    title: '邮箱',
+    title: 'Mail',
     align: 'center',
     key: 'email',
   },
   {
-    title: '联系方式',
+    title: 'Contact information',
     align: 'center',
     key: 'tel',
     render: (row) => {
@@ -65,7 +65,7 @@ const columns: DataTableColumns<Entity.User> = [
     },
   },
   {
-    title: '状态',
+    title: 'state',
     align: 'center',
     key: 'status',
     render: (row) => {
@@ -77,13 +77,13 @@ const columns: DataTableColumns<Entity.User> = [
           onUpdateValue={(value: 0 | 1) =>
             handleUpdateDisabled(value, row.id!)}
         >
-          {{ checked: () => '启用', unchecked: () => '禁用' }}
+          {{ checked: () => 'Open up', unchecked: () => 'Disable' }}
         </NSwitch>
       )
     },
   },
   {
-    title: '操作',
+    title: 'operate',
     align: 'center',
     key: 'actions',
     render: (row) => {
@@ -93,12 +93,12 @@ const columns: DataTableColumns<Entity.User> = [
             size="small"
             onClick={() => modalRef.value.openModal('edit', row)}
           >
-            编辑
+            edit
           </NButton>
           <NPopconfirm onPositiveClick={() => delteteUser(row.id!)}>
             {{
-              default: () => '确认删除',
-              trigger: () => <NButton size="small" type="error">删除</NButton>,
+              default: () => 'Confirm delete',
+              trigger: () => <NButton size="small" type="error">delete</NButton>,
             }}
           </NPopconfirm>
         </NSpace>
@@ -129,31 +129,31 @@ onMounted(() => {
 })
 
 function changePage(page: number, size: number) {
-  window.$message.success(`分页器:${page},${size}`)
+  window.$message.success(`Pagothe:${page},${size}`)
 }
 
 const treeData = ref([
   {
     id: '1',
-    label: '安徽总公司',
+    label: 'Anhui Corporation',
     children: [
       {
         id: '2',
-        label: '合肥分公司',
+        label: 'Hefei Branch',
         children: [
           {
             id: '4',
-            label: '财务部门',
+            label: 'Financial department',
           },
           {
             id: '5',
-            label: '采购部门',
+            label: 'Procurement department',
           },
         ],
       },
       {
         id: '3',
-        label: '芜湖分公司',
+        label: 'Wuhu Branch',
       },
     ],
   },
@@ -174,24 +174,24 @@ const treeData = ref([
       <n-card>
         <n-form ref="formRef" :model="model" label-placement="left" inline :show-feedback="false">
           <n-flex>
-            <n-form-item label="姓名" path="condition_1">
-              <n-input v-model:value="model.condition_1" placeholder="请输入" />
+            <n-form-item label="Name" path="condition_1">
+              <n-input v-model:value="model.condition_1" placeholder="Please enter" />
             </n-form-item>
-            <n-form-item label="性别" path="condition_2">
-              <n-input v-model:value="model.condition_2" placeholder="请输入" />
+            <n-form-item label="gender" path="condition_2">
+              <n-input v-model:value="model.condition_2" placeholder="Please enter" />
             </n-form-item>
             <n-flex class="ml-auto">
               <NButton type="primary" @click="getUserList">
                 <template #icon>
                   <icon-park-outline-search />
                 </template>
-                搜索
+                Search
               </NButton>
               <NButton strong secondary @click="handleResetSearch">
                 <template #icon>
                   <icon-park-outline-redo />
                 </template>
-                重置
+                Repossess
               </NButton>
             </n-flex>
           </n-flex>
@@ -204,7 +204,7 @@ const treeData = ref([
             <template #icon>
               <icon-park-outline-add-one />
             </template>
-            新建用户
+            New user
           </NButton>
         </template>
         <NSpace vertical>
@@ -212,7 +212,7 @@ const treeData = ref([
           <Pagination :count="count" @change="changePage" />
         </NSpace>
 
-        <TableModal ref="modalRef" modal-name="用户" />
+        <TableModal ref="modalRef" modal-name="user" />
       </n-card>
     </NSpace>
   </n-flex>

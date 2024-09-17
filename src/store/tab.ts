@@ -19,15 +19,15 @@ export const useTabStore = defineStore('tab-store', {
   },
   actions: {
     addTab(route: RouteLocationNormalized) {
-      // 根据meta确定是否不添加，可用于错误页,登录页等
+      // Determine whether it is not added according to META, it can be used for error page, login page, etc.
       if (route.meta.withoutTab)
         return
 
-      // 如果标签名称已存在则不添加
+      // If the tag name already exists, it will not be added
       if (this.hasExistTab(route.path as string))
         return
 
-      // 根据meta.pinTab传递到不同的分组中
+      // Pass to different groups according to meta.pintab
       if (route.meta.pinTab)
         this.pinTabs.push(route)
       else
@@ -35,26 +35,26 @@ export const useTabStore = defineStore('tab-store', {
     },
     async closeTab(path: string) {
       const tabsLength = this.tabs.length
-      // 如果动态标签大于一个,才会标签跳转
+      // If the dynamic label is greater than one, the label will jump
       if (this.tabs.length > 1) {
-        // 获取关闭的标签索引
+        // Get the closure label index
         const index = this.getTabIndex(path)
         const isLast = index + 1 === tabsLength
-        // 如果是关闭的当前页面，路由跳转到原先标签的后一个标签
+        // If it is the current page that is closed, the routing jump to the latter label of the original label
         if (this.currentTabPath === path && !isLast) {
-          // 跳转到后一个标签
+          // Jump to the latter label
           router.push(this.tabs[index + 1].path)
         }
         else if (this.currentTabPath === path && isLast) {
-          // 已经是最后一个了，就跳转前一个
+          // It's the last one, just jump the first one
           router.push(this.tabs[index - 1].path)
         }
       }
-      // 删除标签
+      // Delete label
       this.tabs = this.tabs.filter((item) => {
         return item.path !== path
       })
-      // 删除后如果清空了，就跳转到默认首页
+      // If it is cleared after deleting, jump to the default homepage
       if (tabsLength - 1 === 0)
         router.push('/')
     },
@@ -86,7 +86,7 @@ export const useTabStore = defineStore('tab-store', {
         return item.path === path
       })
     },
-    /* 设置当前激活的标签 */
+    /* Set the currently activated label */
     setCurrentTab(path: string) {
       this.currentTabPath = path
     },

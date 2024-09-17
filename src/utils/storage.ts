@@ -5,10 +5,10 @@ interface StorageData<T> {
   expire: number | null
 }
 /**
- * LocalStorage部分操作
+ * LocalStorage part of operation
  */
 function createLocalStorage<T extends Storage.Local>() {
-  // 默认缓存期限为7天
+  // The default cache period is 7 days
 
   function set<K extends keyof T>(key: K, value: T[K], expire: number = 60 * 60 * 24 * 7) {
     const storageData: StorageData<T[K]> = {
@@ -49,7 +49,7 @@ function createLocalStorage<T extends Storage.Local>() {
   }
 }
 /**
- * sessionStorage部分操作
+ * sessionStorage partial operation
  */
 
 function createSessionStorage<T extends Storage.Session>() {

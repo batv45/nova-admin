@@ -1,8 +1,8 @@
-/* 存放数据库实体表类型， 具体内容在 ./entities */
+/* Stay the type of database entity table, the specific content is ./entities */
 declare namespace Entity {
 }
 
-/* 各类接口返回的数据类型， 具体内容在 ./api */
+/* Data types returned by various interfaces, the specific content is ./api */
 declare namespace Api {
 
 }
@@ -34,15 +34,15 @@ declare namespace Storage {
   }
 
   interface Local {
-    /* 存储用户信息 */
+    /* Store user information */
     userInfo: Api.Login.Info
-    /* 存储访问token */
+    /* Store access token */
     accessToken: string
-    /* 存储刷新token */
+    /* Store refresh token */
     refreshToken: string
-    /* 存储登录账号 */
+    /* Store login account */
     loginAccount: any
-    /* 存储当前语言 */
+    /* Store the current language */
     lang: App.lang
   }
 }

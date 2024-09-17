@@ -10,7 +10,7 @@ export const useDictStore = defineStore('dict-store', {
   },
   actions: {
     async dict(code: string) {
-      // 调用前初始化
+      // Before calling
       if (!this.dictMap) {
         this.initDict()
       }
@@ -39,7 +39,7 @@ export const useDictStore = defineStore('dict-store', {
       const { data, isSuccess } = await fetchDictList(code)
       if (isSuccess) {
         Reflect.set(this.dictMap, code, data)
-        // 同步至session
+        // Synchronize to session
         session.set('dict', this.dictMap)
         return data
       }

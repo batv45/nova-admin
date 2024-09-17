@@ -1,24 +1,24 @@
 import { request } from '../http'
 
-// 获取所有路由信息
+// Get all routing information
 export function fetchAllRoutes() {
   return request.Get<Service.ResponseResult<AppRoute.RowRoute[]>>('/getUserRoutes')
 }
 
-// 获取所有用户信息
+// Get all user information
 export function fetchUserPage() {
   return request.Get<Service.ResponseResult<Entity.User[]>>('/userPage')
 }
-// 获取所有角色列表
+// Getting all the corner list
 export function fetchRoleList() {
   return request.Get<Service.ResponseResult<Entity.Role[]>>('/role/list')
 }
 
 /**
- * 请求获取字典列表
+ * Request to obtain dictionary list
  *
- * @param code - 字典编码，用于筛选特定的字典列表
- * @returns 返回的字典列表数据
+ * @param code - Dictionary coding, used to screen a specific dictionary list
+ * @returns Back dictionary list data
  */
 export function fetchDictList(code?: string) {
   const params = { code }

@@ -10,15 +10,15 @@ export function setupRouterGuard(router: Router) {
   const tabStore = useTabStore()
 
   router.beforeEach(async (to, from, next) => {
-    // 判断是否是外链，如果是直接打开网页并拦截跳转
+    // Determine whether it is an external link, if it is directly opened the webpage and intercept the jump
     if (to.meta.href) {
       window.open(to.meta.href)
       return false
     }
-    // 开始 loadingBar
+    // Start loadingbar
     appStore.showProgress && window.$loadingBar?.start()
 
-    // 判断有无TOKEN,登录鉴权
+    // Determine whether there is token, log in to the verification
     const isLogin = Boolean(local.get('accessToken'))
     if (!isLogin) {
       if (to.name === 'login')
@@ -31,12 +31,12 @@ export function setupRouterGuard(router: Router) {
       return false
     }
 
-    // 判断路由有无进行初始化
+    // Determine whether the route is initialized
     if (!routeStore.isInitAuthRoute) {
       await routeStore.initAuthRoute()
-      // 动态路由加载完回到根路由
+      // Dynamic routing loaded back to the root routing
       if (to.name === '404') {
-      // 等待权限路由加载好了，回到之前的路由,否则404
+      // Waiting for the right routing, return to the previous route, otherwise 404
         next({
           path: to.fullPath,
           replace: true,
@@ -47,7 +47,7 @@ export function setupRouterGuard(router: Router) {
       }
     }
 
-    // 判断当前页是否在login,则定位去首页
+    // Determine whether the current page is on Login, then position it to the homepage
     if (to.name === 'login') {
       next({ path: '/' })
       return false
@@ -56,18 +56,18 @@ export function setupRouterGuard(router: Router) {
     next()
   })
   router.beforeResolve((to) => {
-    // 设置菜单高亮
+    // Set the menu highlight
     routeStore.setActiveMenu(to.meta.activeMenu ?? to.fullPath)
     // 添加tabs
     tabStore.addTab(to)
-    // 设置高亮标签;
+    // Set the highlight label;
     tabStore.setCurrentTab(to.path as string)
   })
 
   router.afterEach((to) => {
-    // 修改网页标题
+    // Modify webpage titles
     document.title = `${to.meta.title} - ${title}`
-    // 结束 loadingBar
+    // End loadingbar
     appStore.showProgress && window.$loadingBar?.finish()
   })
 }

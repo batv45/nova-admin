@@ -6,27 +6,27 @@ import Chart3 from './components/chart3.vue'
 const tableData = [
   {
     id: 0,
-    name: '商品名称1',
+    name: 'Commodity name 1',
     start: '2022-02-02',
     end: '2022-02-02',
     prograss: '100',
-    status: '已完成',
+    status: 'Complete',
   },
   {
     id: 0,
-    name: '商品名称2',
+    name: 'Commodity name 2',
     start: '2022-02-02',
     end: '2022-02-02',
     prograss: '50',
-    status: '交易中',
+    status: 'Transaction',
   },
   {
     id: 0,
-    name: '商品名称3',
+    name: 'Commodity name 3',
     start: '2022-02-02',
     end: '2022-02-02',
     prograss: '100',
-    status: '已完成',
+    status: 'Complete',
   },
 ]
 </script>
